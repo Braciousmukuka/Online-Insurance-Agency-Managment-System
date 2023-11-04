@@ -67,7 +67,7 @@
     <div class="col-md-3">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-green">
-          <i class="glyphicon glyphicon-usd"></i>
+          <i class="glyphicon glyphicon-shopping-cart"></i>
         </div>
         <div class="panel-value pull-right">
           <h2 class="margin-top"> <?php  echo $c_sale['total']; ?></h2>
@@ -93,7 +93,6 @@
            <tr>
              <th>Title</th>
              <th>Total Sold</th>
-             <th>Total Quantity</th>
            <tr>
           </thead>
           <tbody>
@@ -101,7 +100,6 @@
               <tr>
                 <td><?php echo remove_junk(first_character($product_sold['name'])); ?></td>
                 <td><?php echo (int)$product_sold['totalSold']; ?></td>
-                <td><?php echo (int)$product_sold['totalQty']; ?></td>
               </tr>
             <?php endforeach; ?>
           <tbody>
@@ -124,7 +122,7 @@
            <th class="text-center" style="width: 50px;">#</th>
            <th>Product Name</th>
            <th>Date</th>
-           <th>Total Sale</th>
+           <th>Sum Assured</th>
          </tr>
        </thead>
        <tbody>
@@ -137,7 +135,7 @@
            </a>
            </td>
            <td><?php echo remove_junk(ucfirst($recent_sale['date'])); ?></td>
-           <td>$<?php echo remove_junk(first_character($recent_sale['price'])); ?></td>
+           <td>ZMW <?php echo remove_junk(first_character($recent_sale['price'])); ?></td>
         </tr>
 
        <?php endforeach; ?>
@@ -167,7 +165,7 @@
                 <?php endif;?>
                 <?php echo remove_junk(first_character($recent_product['name']));?>
                   <span class="label label-warning pull-right">
-                 $<?php echo (int)$recent_product['sale_price']; ?>
+                 <?php echo (int)$recent_product['sale_price']; ?>
                   </span>
                 </h4>
                 <span class="list-group-item-text pull-right">

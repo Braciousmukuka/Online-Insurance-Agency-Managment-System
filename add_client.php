@@ -8,32 +8,50 @@
 <?php
   if(isset($_POST['add_client'])){
 
-   $req_fields = array('full-name','username','password','level' );
+   $req_fields = array('full-name','username','password','level','reg','phone','address','bank');
    validate_fields($req_fields);
 
    if(empty($errors)){
-           $name   = remove_junk($db->escape($_POST['full-name']));
+       $name   = remove_junk($db->escape($_POST['full-name']));
        $username   = remove_junk($db->escape($_POST['username']));
        $password   = remove_junk($db->escape($_POST['password']));
        $user_level = (int)$db->escape($_POST['level']);
        $password = sha1($password);
+       $reg = remove_junk($db->escape($_POST['reg']));
+       $phone =  remove_junk($db->escape($_POST['phone']));
+       $address =  remove_junk($db->escape($_POST['address']));
+       $bank = remove_junk($db->escape($_POST['bank']));
+
+       //SQL statment1.(Users Entry)
         $query = "INSERT INTO users (";
         $query .="name,username,password,user_level,status";
         $query .=") VALUES (";
         $query .=" '{$name}', '{$username}', '{$password}', '{$user_level}','1'";
         $query .=")";
+
+        //SQL statment2.(Clients Entry)
+        $query2 = "INSERT INTO clients (";
+        $query2 .="name,nrc,phone,address,bank";
+        $query2 .=") VALUES (";
+        $query2 .=" '{$username}', '{$reg}', '{$phone}', '{$address}','{$bank}'";
+        $query2 .=")";
+
         if($db->query($query)){
+
+          //Execute Second query
+          if($db->query($query2)){}
+
           //sucess
           $session->msg('s',"User account has been creted! ");
-          redirect('add_user.php', false);
+          redirect('users.php', false);
         } else {
           //failed
           $session->msg('d',' Sorry failed to create account!');
-          redirect('add_user.php', false);
+          redirect('add_client.php', false);
         }
    } else {
      $session->msg("d", $errors);
-      redirect('add_user.php',false);
+      redirect('add_client.php',false);
    }
  }
 ?>

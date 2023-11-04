@@ -79,7 +79,7 @@ $results = '';
   <?php if($results): ?>
     <div class="page-break">
        <div class="sale-head">
-           <h1>Inventory Management System - Sales Report</h1>
+           <h1>Sales Report</h1>
            <strong><?php if(isset($start_date)){ echo $start_date;}?> TILL DATE <?php if(isset($end_date)){echo $end_date;}?> </strong>
        </div>
       <table class="table table-border">
@@ -87,9 +87,9 @@ $results = '';
           <tr>
               <th>Date</th>
               <th>Product Title</th>
-              <th>Buying Price</th>
-              <th>Selling Price</th>
-              <th>Total Qty</th>
+              <th>Premium Price</th>
+              <th>Intrest</th>
+              <th>Total Intrest</th>
               <th>TOTAL</th>
           </tr>
         </thead>
@@ -110,15 +110,15 @@ $results = '';
         <tfoot>
          <tr class="text-right">
            <td colspan="4"></td>
-           <td colspan="1">Grand Total</td>
-           <td> $
+           <td colspan="1">Grand Payout</td>
+           <td> ZMW 
            <?php echo number_format(total_price($results)[0], 2);?>
           </td>
          </tr>
          <tr class="text-right">
            <td colspan="4"></td>
-           <td colspan="1">Profit</td>
-           <td> $<?php echo number_format(total_price($results)[1], 2);?></td>
+           <td colspan="1">Claims</td>
+           <td> ZMW <?php echo number_format(total_price($results)[1], 2);?></td>
          </tr>
         </tfoot>
       </table>

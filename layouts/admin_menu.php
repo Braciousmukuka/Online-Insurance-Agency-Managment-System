@@ -38,7 +38,7 @@
       </a>
       <ul class="nav submenu">
          <li><a href="sales.php">Review Sales</a> </li>
-         <li><a href="add_sale.php">Sale Policy</a> </li>
+         <li><a href="sale_policy.php">Sale Policy</a> </li>
      </ul>
   </li>
   <li>
@@ -46,16 +46,6 @@
       <i class="glyphicon glyphicon-picture"></i>
       <span>Media Files</span>
     </a>
-  </li>
-  <li>
-    <a href="#" class="submenu-toggle">
-      <i class="glyphicon glyphicon-credit-card"></i>
-       <span>Sales</span>
-      </a>
-      <ul class="nav submenu">
-         <li><a href="sales.php">Manage Sales</a> </li>
-         <li><a href="add_sale.php">Add Sale</a> </li>
-     </ul>
   </li>
   <li>
     <a href="#" class="submenu-toggle">

@@ -31,7 +31,7 @@ $sales = find_all_sale();
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
                 <th> Product name </th>
-                <th> Client name </th>
+                <!--<th> Client name </th>-->
                 <th class="text-center" style="width: 15%;"> Intrest</th>
                 <th class="text-center" style="width: 15%;"> Sum Assured (Quarterly) </th>
                 <th class="text-center" style="width: 15%;"> Date </th>
@@ -43,7 +43,7 @@ $sales = find_all_sale();
              <tr>
                <td class="text-center"><?php echo count_id();?></td>
                <td><?php echo remove_junk($sale['name']); ?></td>
-               <td><?php echo remove_junk($sale['Client']); ?></td>
+               <!--<td><?php //echo remove_junk($sale['client']); ?></td>-->
                <td class="text-center"><?php echo (int)$sale['qty']."%"; ?></td>
                <td class="text-center"><?php echo remove_junk("ZMW ".  $sale['price']); ?></td>
                <td class="text-center"><?php echo $sale['date']; ?></td>

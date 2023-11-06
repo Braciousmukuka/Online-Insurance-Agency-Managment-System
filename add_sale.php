@@ -8,20 +8,20 @@
 <?php
 
   if(isset($_POST['add_sale'])){
-    $req_fields = array('s_id','quantity','price','total', 'date', 'client' );
+    $req_fields = ['s_id','quantity','price','total', 'date', 'customer'];
     validate_fields($req_fields);
         if(empty($errors)){
           $p_id      = $db->escape((int)$_POST['s_id']);
           $s_qty     = $db->escape((int)$_POST['quantity']);
           $s_total   = $db->escape($_POST['total']);
-          $client  = $db->escape($_POST['client']);
+          $client   = $db->escape($_POST['customer']);
           $date      = $db->escape($_POST['date']);
           $s_date    = make_date();
 
           $sql  = "INSERT INTO sales (";
           $sql .= " product_id,qty,price,date,client";
           $sql .= ") VALUES (";
-          $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}','{$client}'";
+          $sql .= "'{$p_id}','{$s_qty}','{$s_total}', '{$s_date}', '{$client}'";
           $sql .= ")";
 
                 if($db->query($sql)){
@@ -42,27 +42,19 @@
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-6">
-        <?php echo display_msg($msg); ?>
-        <form method="post" action="ajax.php" autocomplete="off" id="sug-form">
-            <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-btn">
-                <button type="submit" class="btn btn-success">Sale</button>
-                </span>
-                <input type="text" id="sug_input" class="form-control" name="title"  placeholder="Search for product name">
-            </div>
-            <div id="result" class="list-group"></div>
-            </div>
-            <div class="form-group">
-              <label for="client">Client</label>
-                <select class="form-control" name="client">
-                    <?php foreach ($groups as $group ):?>
-                    <option value ="<?php echo $group['name'];?>"><?php echo ucwords($group['name']);?></option>
-                    <?php endforeach;?>
-                </select>
-            </div>
-        </form>
-    </div>
+    <?php echo display_msg($msg); ?>
+    <form method="post" action="ajax.php" autocomplete="off" id="sug-form">
+      <div class="form-group">
+      <div class="input-group">
+          <span class="input-group-btn">
+          <button type="submit" class="btn btn-success">Sale</button>
+          </span>
+          <input type="text" id="sug_input" class="form-control" name="title"  placeholder="Search for product name">
+      </div>
+      <div id="result" class="list-group"></div>
+      </div>
+    </form>
+  </div>
 </div>
 <div class="row">
 
@@ -82,6 +74,7 @@
             <th> Premium </th>
             <th> Intrest </th>
             <th> Sum Assured (Quarterly) </th>
+            <th> Client</th>
             <th> Date</th>
             <th> Action</th>
            </thead>

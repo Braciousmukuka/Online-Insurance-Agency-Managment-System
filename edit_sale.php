@@ -66,9 +66,9 @@ if(!$sale){
        <table class="table table-bordered">
          <thead>
           <th> Product title </th>
-          <th> Qty </th>
-          <th> Price </th>
-          <th> Total </th>
+          <th> Intrest </th>
+          <th> Verify Intrest </th>
+          <th> Sum Assured </th>
           <th> Date</th>
           <th> Action</th>
          </thead>

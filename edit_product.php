@@ -102,36 +102,30 @@ if(!$product){
                <div class="row">
                  <div class="col-md-4">
                   <div class="form-group">
-                    <label for="qty">Quantity</label>
+                    <label for="qty">Years</label>
                     <div class="input-group">
-                      <span class="input-group-addon">
-                       <i class="glyphicon glyphicon-shopping-cart"></i>
-                      </span>
+                    
                       <input type="number" class="form-control" name="product-quantity" value="<?php echo remove_junk($product['quantity']); ?>">
                    </div>
                   </div>
                  </div>
                  <div class="col-md-4">
                   <div class="form-group">
-                    <label for="qty">Buying price</label>
+                    <label for="qty">Premium price</label>
                     <div class="input-group">
-                      <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-usd"></i>
-                      </span>
+                      
                       <input type="number" class="form-control" name="buying-price" value="<?php echo remove_junk($product['buy_price']);?>">
-                      <span class="input-group-addon">.00</span>
+                     
                    </div>
                   </div>
                  </div>
                   <div class="col-md-4">
                    <div class="form-group">
-                     <label for="qty">Selling price</label>
+                     <label for="qty">Intrest</label>
                      <div class="input-group">
-                       <span class="input-group-addon">
-                         <i class="glyphicon glyphicon-usd"></i>
-                       </span>
+                  
                        <input type="number" class="form-control" name="saleing-price" value="<?php echo remove_junk($product['sale_price']);?>">
-                       <span class="input-group-addon">.00</span>
+                       
                     </div>
                    </div>
                   </div>

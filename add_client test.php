@@ -1,46 +1,52 @@
 <?php
   $page_title = 'Add User';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-  page_require_level(1);
-  $groups = find_all('user_groups');
+    $groups = find_all('user_groups');
 ?>
 <?php
   if(isset($_POST['add_client'])){
 
-   $req_fields = array('full-name','username','password','level','reg','phone','address','bank');
+   $req_fields = array('full-name','username','password','level' );
    validate_fields($req_fields);
 
+   $fields2 = array('nrc','phone','address','bank');
+   validate_fields($fields2);
+
    if(empty($errors)){
+    //Adding to users table
        $name   = remove_junk($db->escape($_POST['full-name']));
        $username   = remove_junk($db->escape($_POST['username']));
        $password   = remove_junk($db->escape($_POST['password']));
+       $name2 = mysqli_real_escape_string($conn, $_POST['full-name']);
+       $nrc = mysqli_real_escape_string($conn, $_POST['nrc']);
+       $phone   = mysqli_real_escape_string($conn, $_POST['phone']);
+       $address   = mysqli_real_escape_string($conn, $_POST['address']);
+       $bank   = mysqli_real_escape_string($conn, $_POST['bank']);;
        $user_level = (int)$db->escape($_POST['level']);
        $password = sha1($password);
-       $reg = remove_junk($db->escape($_POST['reg']));
-       $phone =  remove_junk($db->escape($_POST['phone']));
-       $address =  remove_junk($db->escape($_POST['address']));
-       $bank = remove_junk($db->escape($_POST['bank']));
-
-       //SQL statment1.(Users Entry)
         $query = "INSERT INTO users (";
         $query .="name,username,password,user_level,status";
         $query .=") VALUES (";
         $query .=" '{$name}', '{$username}', '{$password}', '{$user_level}','1'";
         $query .=")";
 
-        //SQL statment2.(Clients Entry)
-        $query2 = "INSERT INTO clients (";
-        $query2 .="name,nrc,phone,address,bank";
-        $query2 .=") VALUES (";
-        $query2 .=" '{$username}', '{$reg}', '{$phone}', '{$address}','{$bank}'";
-        $query2 .=")";
+        $sql = "INSERT INTO clients (";
+        $sql .="name,nrc,phone,address,bank";
+        $sql .=") VALUES (";
+        $sql .=" '{$name2}', '{$nrc}', '{$phone}', '{$address}','{$address}'";
+        $sql .=")";
+        
+      
+        // Adding to clients
+        $sql = " INSERT INTO clients (name,nrc,phone,address,bank) VALUES ('{$name2}','{$nrc}','{$phone},'{$address},'{$bank}')";
+
+        if(mysqli_query ($conn, $sql)){ 
+
+        }else{
+          echo mysqli_error($conn);
+        }
 
         if($db->query($query)){
-
-          //Execute Second query
-          if($db->query($query2)){}
-
           //sucess
           $session->msg('s',"User account has been creted! ");
           redirect('users.php', false);
@@ -62,7 +68,7 @@
       <div class="panel-heading">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          <span>Add New User</span>
+          <span>Add New Client</span>
        </strong>
       </div>
       <div class="panel-body">
@@ -81,22 +87,21 @@
                 <input type="password" class="form-control" name ="password"  placeholder="Password">
             </div>
             <div class="form-group">
-                <label for="reg">N.R.C</label>
-                <input type="text" class="form-control" name ="reg"  placeholder="National Registration #">
+                <label for="nrc">NRC</label>
+                <input type="text" class="form-control" name ="nrc"  placeholder="N.R.C">
             </div>
             <div class="form-group">
-                <label for="phone">Phone Number</label>
+                <label for="phone">Phone #</label>
                 <input type="text" class="form-control" name ="phone"  placeholder="Phone Number">
-            </div>
-            <div class="form-group">
+            </div><div class="form-group">
                 <label for="address">Address</label>
                 <input type="text" class="form-control" name ="address"  placeholder="Physical Address">
             </div>
             <div class="form-group">
                 <label for="bank">Acc Details</label>
                 <input type="password" class="form-control" name ="bank"  placeholder="Enter card number">
-                <input  class="form-control" placeholder="Enter C.V.V">
-                <input  class="form-control" placeholder="Expiry Date">
+                <input type="text" class="form-control" name =""  placeholder="Enter CVV">
+                <input type="text" class="form-control" name =""  placeholder="Expiry Date">
             </div>
             <div class="form-group">
               <label for="level">User Role</label>
@@ -107,7 +112,7 @@
                 </select>
             </div>
             <div class="form-group clearfix">
-              <button type="submit" name="add_client" class="btn btn-primary">Add Client</button>
+              <button type="submit" name="add_client" class="btn btn-primary">Add User</button>
             </div>
         </form>
         </div>

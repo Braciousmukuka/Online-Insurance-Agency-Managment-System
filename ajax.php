@@ -1,5 +1,6 @@
 <?php
   require_once('includes/load.php');
+  $groups = find_all('clients');
   if (!$session->isUserLoggedIn(true)) { redirect('index.php', false);}
 ?>
 
@@ -33,19 +34,27 @@
     $product_title = remove_junk($db->escape($_POST['p_name']));
     if($results = find_all_product_info_by_title($product_title)){
         foreach ($results as $result) {
+        
 
           $html .= "<tr>";
 
           $html .= "<td id=\"s_name\">".$result['name']."</td>";
           $html .= "<input type=\"hidden\" name=\"s_id\" value=\"{$result['id']}\">";
           $html  .= "<td>";
-          $html  .= "<input type=\"text\" class=\"form-control\" name=\"price\" value=\"{$result['sale_price']}\">";
+          $html  .= "<input type=\"text\" class=\"form-control\" name=\"price\" value=\"{$result['buy_price']}\">";
           $html  .= "</td>";
           $html .= "<td id=\"s_qty\">";
-          $html .= "<input type=\"text\" class=\"form-control\" name=\"quantity\" value=\"1\">";
+          $html .= "<input type=\"text\" class=\"form-control\" name=\"quantity\" value=\"{$result['sale_price']}\">";
           $html  .= "</td>";
           $html  .= "<td>";
           $html  .= "<input type=\"text\" class=\"form-control\" name=\"total\" value=\"{$result['sale_price']}\">";
+          $html  .= "</td>";
+          $html  .= "<td>";
+          $html  .= "<select class=\"form-control\" name=\"customer\">";
+                       foreach ($groups as $group ){
+                        $html .= " <option name = \"customer\" value =\"<{$group['name']}\">{$group['name']}</option>";
+                      }
+          $html  .= "</select>";         
           $html  .= "</td>";
           $html  .= "<td>";
           $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date\" data-date data-date-format=\"yyyy-mm-dd\">";

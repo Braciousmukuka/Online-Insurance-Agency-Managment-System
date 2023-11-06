@@ -4,7 +4,7 @@
   // Checkin What level user has permission to view this page
    page_require_level(3);
    $groups = find_all('clients');
-?>
+?> 
 <?php
 
   if(isset($_POST['add_sale'])){
